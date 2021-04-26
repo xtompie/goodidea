@@ -14,3 +14,8 @@
 - Event
 - Listener
 - Model
+- Builder np. SearchProductQueryBuilder::instance()->tite('xd')->color('red')->build()->ask()
+- VO
+- Enum
+- Repository
+- Entity
