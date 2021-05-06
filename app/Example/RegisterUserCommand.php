@@ -2,6 +2,9 @@
 
 namespace App\Example;
 
+use App\System\CommandBus;
+use App\System\CommandResult;
+
 class RegisterUserCommand
 {
     public function __construct(
@@ -18,5 +21,9 @@ class RegisterUserCommand
     {
         return $this->pass;
     }
-    
+
+    public function execute(): CommandResult
+    {
+        return CommandBus::instance()->execute($this);
+    }
 }

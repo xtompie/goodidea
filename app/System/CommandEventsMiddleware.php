@@ -2,8 +2,10 @@
 
 namespace App\System;
 
-class CommandEventsMiddleware implements CommandMiddlewareInterface
+class CommandEventsMiddleware implements CommandMiddlewareInterface, Shared
 {
+    use Instance;
+
     public function execute(object $command, $next): ?object 
     {
         $result = $next($command);

@@ -4,7 +4,7 @@ namespace App\Example;
 
 use App\System\CommandResult;
 
-class RegisterUserHandler
+class RegisterUserCommandHandler
 {
     public function execute(RegisterUserCommand $command): CommandResult
     {

@@ -39,5 +39,4 @@ class CommandResult implements CommandResultHasEventsInterface
     {
         return $this->events;
     }
-    
 }

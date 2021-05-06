@@ -6,12 +6,9 @@ use Closure;
 
 class CommandBus
 {
-    protected Closure $chain;
+    use Instance;
 
-    public static function instance(): CommandBus
-    {
-        return new CommandBus;
-    }
+    protected Closure $chain;
 
     public function __construct()
     {
@@ -26,8 +23,9 @@ class CommandBus
     protected function middlewares(): array
     {
         return [
-            new CommandEventsMiddleware,
-            new CommandExecutorMiddleware,
+            CommandEventsMiddleware::instance(),
+            CommandClearQueryCacheMiddleware::instance(),
+            CommandHandlerMiddleware::instance(),
         ];
     }
 
