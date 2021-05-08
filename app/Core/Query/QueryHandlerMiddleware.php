@@ -1,6 +1,9 @@
 <?php
 
-namespace App\System;
+namespace App\Core\Query;
+
+use App\Core\Instance;
+use App\Core\Shared;
 
 class QueryHandlerMiddleware implements QueryMiddlewareInterface, Shared
 {

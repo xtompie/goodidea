@@ -1,6 +1,10 @@
 <?php
 
-namespace App\System;
+namespace App\Core\Command;
+
+use App\Core\Event\EventBus;
+use App\Core\Instance;
+use App\Core\Shared;
 
 class CommandEventsMiddleware implements CommandMiddlewareInterface, Shared
 {
@@ -10,8 +14,8 @@ class CommandEventsMiddleware implements CommandMiddlewareInterface, Shared
     {
         $result = $next($command);
 
-        if ($result instanceof CommandResultHasEventsInterface) {
-            /** @var CommandResultHasEventsInterface $result */
+        if ($result instanceof CommandPublishesEvents) {
+            /** @var CommandPublishesEvents $result */
             foreach ($result->events() as $event) {
                 EventBus::instance()->publish($event);
             }

@@ -26,7 +26,6 @@
 - Event | Public/Private/Tech
 - Listener
 - Model
-- Builder np. SearchProductQueryBuilder::instance()->tite('xd')->color('red')->build()->ask()
 - VO
 - Enum
 - Repository
@@ -43,19 +42,42 @@ Query
  - cache
  - log time debugbar
 
-## Tree Model
-- GetFlatTreeNodesQuery()
-- TreeNodeModel
-  - childNodes(): TreeNodeCollection
-  - parent: TreeNodeModel|null
-- TreeNodeCollection
-  - filterWhereParent($id)
-  - sort() 
-- TreeNodeRepository
-  - findRoot(): TreeNodeModel
-  - findAllChildNodesForParent($nodeId)
-  - findParentForNode($nodeId)
+# Tree
+
+- /category/$name-$id
+  - breadcrumbs
+  - children categories
+- /article/$name-$id
+  - show categories where product is
+- /sitemap
+  - all categories in t
+
+## Read Model
+
+- GetAllCategoriesQuery()
++ CategoryModel
+  + children(): CategoryCollection
+  + parent: CategoryModel|null
+  + id()
+  + name()
++ CategoryCollection
+  - filterWhereParent(CategoryModel):
+  - sort(): static
+  - all(): array
++ CategoryRepository
+  + findRoot(): CategoryModel
+  + findById($nodeId)
+  - findAllChildNodesForParent(CategoryModel)
+  - findParentForNode(CategoryModel)
+
+## Write Model
+
++ crud entity
++ save all tree 
 
 
+## Feature: related categories
+
++ CategoryModel->related(): CategoryCollection
 
   

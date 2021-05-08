@@ -1,7 +1,8 @@
 <?php
 
-namespace App\System;
+namespace App\Core\Query;
 
+use App\Core\Instance;
 use Closure;
 
 class QueryBus

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\System;
+namespace App\Core\Query;
 
 interface QueryMiddlewareInterface
 {

@@ -1,6 +1,10 @@
 <?php
 
-namespace App\System;
+namespace App\Core\Command;
+
+use App\Core\Query\QueryCacheProvider;
+use App\Core\Instance;
+use App\Core\Shared;
 
 class CommandClearQueryCacheMiddleware implements CommandMiddlewareInterface, Shared
 {

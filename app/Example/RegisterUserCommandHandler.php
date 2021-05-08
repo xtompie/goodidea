@@ -2,7 +2,7 @@
 
 namespace App\Example;
 
-use App\System\CommandResult;
+use App\Core\Command\CommandResult;
 
 class RegisterUserCommandHandler
 {

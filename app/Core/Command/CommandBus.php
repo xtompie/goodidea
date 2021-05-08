@@ -1,7 +1,8 @@
 <?php
 
-namespace App\System;
+namespace App\Core\Command;
 
+use App\Core\Instance;
 use Closure;
 
 class CommandBus

@@ -1,6 +1,9 @@
 <?php
 
-namespace App\System;
+namespace App\Core\Command;
+
+use App\Core\Instance;
+use App\Core\Shared;
 
 class CommandHandlerMiddleware implements CommandMiddlewareInterface, Shared
 {

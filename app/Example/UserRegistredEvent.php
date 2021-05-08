@@ -2,7 +2,7 @@
 
 namespace App\Example;
 
-use App\System\EventPublicInterface;
+use App\Core\Event\EventPublicInterface;
 
 class UserRegistredEvent implements EventPublicInterface
 {

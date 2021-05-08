@@ -2,8 +2,7 @@
 
 namespace App\Example;
 
-use App\System\CommandBus;
-use App\System\CommandResult;
+use App\Core\Command\CommandBus;
 
 class SendRegistrationMailCommand
 {

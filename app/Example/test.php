@@ -1,10 +1,9 @@
 <?php
 
+use App\Core\Command\CommandBus;
+use App\Core\Query\QueryBus;
 use App\Example\RegisterUserCommand;
 use App\Example\UserQuery;
-use App\System\CommandBus;
-use App\System\CommandResult;
-use App\System\QueryBus;
 
 /** @var CommandResult $registration  */
 $registration = CommandBus::instance()->execute(new RegisterUserCommand('test@example.com', '1234'));
