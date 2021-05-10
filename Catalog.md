@@ -45,7 +45,6 @@ class CategoryRepository {
     public function findById($categoryId): CategoryModel|null {}
     public function findByUri($uri): CategoryModel|null {}
     public function findAllWhereParent(CategoryModel $category): CategoryCollection {}
-    public function findParentFor(CategoryModel $category): CategoryModel|null {}
 }
 class CategoryCollection implements Iterator {
     public function whereParent(CategoryModel $category): static {}

@@ -2,7 +2,7 @@
 
 namespace App\Example;
 
-use App\Core\QueryBus;
+use App\Core\Query\QueryBus;
 
 class UserQuery
 {

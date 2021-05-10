@@ -2,10 +2,8 @@
 
 namespace App\Example;
 
-use App\Core\Command\CommandBus as CommandCommandBus;
-use App\Core\Command\CommandResult as CommandCommandResult;
-use App\Core\CommandBus;
-use App\Core\CommandResult;
+use App\Core\Command\CommandBus;
+use App\Core\Command\CommandResult;
 
 class RegisterUserCommand
 {
@@ -24,8 +22,8 @@ class RegisterUserCommand
         return $this->pass;
     }
 
-    public function execute(): CommandCommandResult
+    public function execute(): CommandResult
     {
-        return CommandCommandBus::instance()->execute($this);
+        return CommandBus::instance()->execute($this);
     }
 }
