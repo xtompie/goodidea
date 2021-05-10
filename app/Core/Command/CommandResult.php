@@ -4,7 +4,7 @@ namespace App\Core\Command;
 
 class CommandResult implements CommandPublishesEvents
 {
-    public function new()
+    public static function new()
     {
         return new static();
     }

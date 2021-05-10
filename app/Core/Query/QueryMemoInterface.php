@@ -2,7 +2,7 @@
 
 namespace App\Core\Query;
 
-interface QueryCacheInterface
+interface QueryMemoInterface
 {
 
 }

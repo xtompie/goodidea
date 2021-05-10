@@ -200,8 +200,7 @@ class SendRegistrationEmailListener
 ## Query
 
 ```php
-class UserQuery
-{
+class UserQuery {
     public function __construct(
         protected string $id,
     ) {}
@@ -211,57 +210,56 @@ class UserQuery
         return QueryBus::instance()->ask($this);
     }
 }
-
-class UserQueryResponse
-{
+class UserQueryHandler {
+    public function ask(UserQuery $query): UserQueryResponse {
+        return UserQuery::notFound();
+    }
+}
+class UserQueryResponse {
+    public static function notFound() {
+        return new static(false, null, []);
+    }
     public function success(): bool {}
-    public function user(): UserModel {}
+    public function user(): UserModel|null {}
     public function attributes(): array {}
 }
 
 ```
-- zwracan jeden obiekt, w srodku proste typy danych - zeby dalo sie serializowac i cachowac
-- Query
-- Handler
-- Response
-
 ## Command
 
 ```php
-class RegisterUserCommand
-{
+class RegisterUserCommand {
     public function __construct(
         protected string $email,
-        protected string $pass
+        protected string $pass,
     ) {}
-
-    public function email()
-    {
+    public function email() {
         return $this->email;
     }
-
-    public function pass()
-    {
+    public function pass() {
         return $this->pass;
     }
-
-    public function execute(): CommandResult
-    {
+    public function execute(): CommandResult {
         return CommandBus::instance()->execute($this);
     }
 }
-
-class CommandResult implements CommandPublishesEvents
-{
+class RegisterUserCommandHandler {
+    public function execute(RegisterUserCommand $command): CommandResult {
+        $id = create_user($command->email(), $command->pass());
+        return CommandResult::new()->withSuccess()->withResource($id)->withEvent(
+            new UserRegistredEvent($id)
+        );
+    }
+}
+class CommandResult {
     public function success(): bool {}
-    public function resource(): string {}
     public function errors(): ErrorCollection {}
+    public function resource(): string {}
     public function events(): array {}
 }
 
 ```
 - nie zwraca danych
-- im mniej robi tym lepiej, reszta przez eventy 
 - Command
 - Handler
 - ?Result 
@@ -282,6 +280,17 @@ class UserRegistredEvent
         return $this->id;
     }
 }
+class EventListeners
+{
+    public static function listeners(): array
+    {
+        return [
+            UserRegistredEvent::class => [
+                SendRegistrationEmailListener::class,
+            ]
+        ];
+    }
+}
 ```
 
 # Model
@@ -298,7 +307,7 @@ class UserRegistredEvent
   - ordering - cena
   - storehouse - lokalizacja, rozmiar
   - delivery - waga, rozmiar, nr seryjny
-- user, ten sam id, correlation id ale inna nazwa
+- user, ten sam id, corelation id ale inna nazwa
   - shopping - shopper
   - ordering - orderer
   - payment - payer

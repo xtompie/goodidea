@@ -12,7 +12,7 @@ class RegisterUserCommandHandler
         $command->pass();
         $id = "1234";
 
-        return CommandResult::withSuccess([
+        return CommandResult::new()->withSuccess([
             new UserRegistredEvent($id)
         ]);
     }

@@ -5,7 +5,7 @@ namespace App\Core\Query;
 use App\Core\Instance;
 use App\Core\Shared;
 
-class QueryCacheProvider implements Shared
+class QueryMemoStorage implements Shared
 {
     use Instance;
 
