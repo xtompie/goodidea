@@ -64,12 +64,7 @@ class DiscountPolicy {
 }
 ```
 
-## Events
-```php
-class OrderCreatedEvent implements EventPublicInteface {
-    public function orderId(): string {}
-}
-```
+
 ## Mixin modules?
 
 ```php
