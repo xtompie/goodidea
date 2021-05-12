@@ -99,7 +99,11 @@ QEP | has_date, has_author   | has_number |
 
 ### 1. Esencyjna
 
+Zależy od problemu, wynika z jego natury i jest nieunikniona.
+
 ### 2. Przypadkowa
+
+Zależy do rozwiązania, wynika z wybranego podejścia. Można je dowolnie rozbudowywać i komplikować.
 
 # Buildding blocks
 

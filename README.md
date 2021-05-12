@@ -1,83 +1,43 @@
-- model
-  - geo/helio
-  - czy jest ciemno?
-  - lot na marsa
-- struktury danych + service
-- flexible
-- wektor zmian  
-- bounded context
-- building blocks
+# Flexarch
+
+1. Modules
+- own architecture
+- own ambiguous language and model
 
 
-## Building blocks
-- Command
-  - Command
-  - Handler
-  - ?Result 
-- Query
-  - Query
-  - Handler
-  - Response
-- Event
-- Bus
-  - CommandBus
-  - QueryBus
-  - EventBus
-- Event | Public/Private/Tech
-- Listener
-- Model
-- VO
-- Enum
-- Repository
-- Entity
+## Query
 
-## CQRS middlewares
-Command
- - clear query cache
- - log time debugbar
- - events 
- - asyc job
- - throttle
-Query
- - cache
- - log time debugbar
+```
++--------------+    +-----------------+    +----------------------+    +-------------+
+| INPUT        | -> | RICH READ MODEL |    | QUERY                | -> | HANDLER     |
+| ------------ |    | --------------- |    | -------------------- |    | ----------- |
+| Controller   |    | CartRepository  |    |                      |    | Read data   |
+| CLI          |    | - find()        | -> |  CartQuery           |    | - SQL query |
+|              |    | CartModel       |    |                      |    | - ORM       |
+|              |    | - items()       |    |                      |    | - APi       |
+|              |    | - sum()         |    |                      |    |             |
+|              |    | CartItem        |    |                      |    |             |
+|              |    | - productId()   |    |                      |    |             |
+|              |    | - quantity()    |    |                      |    |             |
+|              |    | - product()     | -> | Catalog\ProductQuery |    |             |
++--------------+    +-----------------+    +----------------------+    +-------------+
+```
 
-# Tree
+## Command
 
-- /category/$name-$id
-  - breadcrumbs
-  - children categories
-- /article/$name-$id
-  - show categories where product is
-- /sitemap
-  - all categories in t
+```
++--------------+    +------------------+    +-----------------------+    +--------------+    +--------------+
+| INPUT        | -> | RICH WRITE MODEL |    |  Command              | -> | HANDLER      |    | DOMAIN       |
+| ------------ |    | ---------------- |    | --------------------- |    | ------------ |    | ------------ |
+| Controller   |    | CartModel        |    |                       |    | Simple write |    | Private      |
+| CLI          |    | - addItem()      | -> |  AddItemToCartCommand |    | ---- OR ---- |    | domain       |
+|              |    |                  |    | - productId           |    | Process      | -> | model        |
+|              |    |                  |    | - quantity            |    | Manager      |    | - validate   |
+|              |    |                  |    |                       |    | / Saga       |    | - calculate  |
+|              |    |                  |    |                       |    |              |    |   rabatt     |
+|              |    |                  |    |                       |    |              |    | - write      |
+|              |    |                  |    |                       |    |              |    | - call api   |
+|              |    | (niepotrzebne)   |    |                       |    |              |    | - compensate |
++--------------+    +------------------+    +-----------------------+    +--------------+    +--------------+
 
-## Read Model
-
-- GetAllCategoriesQuery()
-+ CategoryModel
-  + children(): CategoryCollection
-  + parent: CategoryModel|null
-  + id()
-  + name()
-+ CategoryCollection
-  - filterWhereParent(CategoryModel):
-  - sort(): static
-  - all(): array
-+ CategoryRepository
-  + findRoot(): CategoryModel
-  + findById($nodeId)
-  - findAllChildNodesForParent(CategoryModel)
-  - findParentForNode(CategoryModel)
-
-## Write Model
-
-+ crud entity
-+ save all tree 
-
-
-## Feature: related categories
-
-+ CategoryModel->related(): CategoryCollection
-
-  
+```

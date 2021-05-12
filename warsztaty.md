@@ -114,7 +114,7 @@ class CategoryModel {
 
 ```
   db.articles {
--     properties LONGTEXT // eg. [{"manufacturer":"dell", "color":"red"}]
+-     properties LONGTEXT // eg. {"manufacturer":"dell", "color":"red"}
   }
 + db.articles_properties {
 +     article_id

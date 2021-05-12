@@ -6,11 +6,11 @@
 class ShopperQuery {
     public function ask(): ShopperModel {}
 }
-class SetBillingAddress {
+class SetBillingAddressCommand {
     public function __construct(Address $address) {}
     public function execute():CommandResult {}
 }
-class SetShippingAddress {
+class SetShippingAddressCommand {
     public function __construct(Address $address) {}
     public function execute():CommandResult {}
 }
