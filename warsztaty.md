@@ -155,8 +155,3 @@ class ArticleListQuery {
     public function withProperties(PropertyValueCollection $properties):static {}
 }
 ```
-
-
-
-
-  
